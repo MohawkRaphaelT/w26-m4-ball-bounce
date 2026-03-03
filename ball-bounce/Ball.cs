@@ -12,7 +12,14 @@ public class Ball
     // "Physics"
     Vector2 gravity = new Vector2(0, 8);
     float forceKept = 0.50f; // 50%
+    float minRandomSpeed = 1000;
+    float maxRandomSpeed = 3000;
 
+    public void AddRandomForceToBall()
+    {
+        velocity = Random.Direction();
+        velocity *= Random.Float(minRandomSpeed, maxRandomSpeed);
+    }
 
     public void MoveBall()
     {
@@ -20,11 +27,36 @@ public class Ball
         velocity += gravity;
         position += velocity * Time.DeltaTime;
 
+        // CONSTRAIN TO X
+        if (position.X + radius > Window.Width)
+        {
+            // Move ball up to touching right edge
+            position.X = Window.Width - radius;
+            // Invert velocity
+            velocity.X = -velocity.X * forceKept;
+        }
+        else if (position.X - radius < 0)
+        {
+            // Move ball up to touching left edge
+            position.X = 0 + radius;
+            // Invert velocity
+            velocity.X = -velocity.X * forceKept;
+        }
+
+        // CONSTRAIN TO Y
         // Check if we are below the screen height / bottom edge
         if (position.Y + radius > Window.Height)
         {
             // Move ball up to touching bottom edge
             position.Y = Window.Height - radius;
+            // Invert velocity to bounce up, scale velocity down a bit
+            velocity.Y = -velocity.Y * forceKept;
+        }
+        // Check if we are above the screen top / top edge
+        else if (position.Y - radius < 0)
+        {
+            // Move ball up to touching top edge
+            position.Y = 0 + radius;
             // Invert velocity to bounce up, scale velocity down a bit
             velocity.Y = -velocity.Y * forceKept;
         }

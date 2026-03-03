@@ -22,6 +22,12 @@ public class Game
     public void Update()
     {
         Window.ClearBackground(Color.OffWhite);
+
+        if (Input.IsKeyboardKeyPressed(KeyboardInput.Space))
+        {
+            ball.AddRandomForceToBall();
+        }
+
         ball.MoveBall();
         ball.DrawBall();
     }
