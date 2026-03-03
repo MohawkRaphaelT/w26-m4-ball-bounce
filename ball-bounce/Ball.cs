@@ -6,7 +6,7 @@ namespace MohawkGame2D;
 public class Ball
 {
     // Ball
-    Vector2 position = new Vector2(200, 50);
+    Vector2 position;
     Vector2 velocity;
     float radius = 25;
     Color color;
@@ -21,6 +21,7 @@ public class Ball
     {
         // This is what happens when a new Ball is created
         color = Random.Color();
+        position = Random.Vector2(Window.Size);
     }
 
     public void TryAddRandomForceToBall()

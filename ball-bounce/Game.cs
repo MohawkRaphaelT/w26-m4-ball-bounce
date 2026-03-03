@@ -11,6 +11,7 @@ namespace MohawkGame2D;
 public class Game
 {
     Ball[] balls = new Ball[100];
+    int count = 0;
 
     public void Setup()
     {
@@ -28,7 +29,14 @@ public class Game
     {
         Window.ClearBackground(Color.OffWhite);
 
-        for (int i = 0; i < balls.Length; i++)
+        if (Input.IsKeyboardKeyPressed(KeyboardInput.A))
+        {
+            count++;
+            if (count > 100)
+                count = 100;
+        }
+
+        for (int i = 0; i < count; i++)
         {
             // Pull one item out of array
             Ball ball = balls[i];
@@ -36,5 +44,7 @@ public class Game
             ball.MoveBall();
             ball.DrawBall();
         }
+
+        Text.Draw($"Count: {count}", 10, 10);
     }
 }
