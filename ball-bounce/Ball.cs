@@ -9,11 +9,19 @@ public class Ball
     Vector2 position = new Vector2(200, 50);
     Vector2 velocity;
     float radius = 25;
+    Color color;
     // "Physics"
     Vector2 gravity = new Vector2(0, 8);
     float forceKept = 0.50f; // 50%
     float minRandomSpeed = 1000;
     float maxRandomSpeed = 3000;
+
+    // Constructor
+    public Ball()
+    {
+        // This is what happens when a new Ball is created
+        color = Random.Color();
+    }
 
     public void TryAddRandomForceToBall()
     {
@@ -70,7 +78,7 @@ public class Ball
         // Draw ball
         Draw.LineSize = 1;
         Draw.LineColor = Color.Black;
-        Draw.FillColor = Color.Red;
+        Draw.FillColor = color;
         Draw.Circle(position, radius);
     }
 }
