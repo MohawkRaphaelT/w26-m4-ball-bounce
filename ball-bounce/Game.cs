@@ -10,25 +10,31 @@ namespace MohawkGame2D;
 /// </summary>
 public class Game
 {
-    Ball ball = new Ball();
+    Ball[] balls = new Ball[100];
 
     public void Setup()
     {
         Window.SetTitle("Ball Bounce");
         Window.SetSize(400, 800);
         Window.TargetFPS = 60;
+
+        for (int i = 0; i < balls.Length; i++)
+        {
+            balls[i] = new Ball();
+        }
     }
 
     public void Update()
     {
         Window.ClearBackground(Color.OffWhite);
 
-        if (Input.IsKeyboardKeyPressed(KeyboardInput.Space))
+        for (int i = 0; i < balls.Length; i++)
         {
-            ball.AddRandomForceToBall();
+            // Pull one item out of array
+            Ball ball = balls[i];
+            ball.TryAddRandomForceToBall();
+            ball.MoveBall();
+            ball.DrawBall();
         }
-
-        ball.MoveBall();
-        ball.DrawBall();
     }
 }

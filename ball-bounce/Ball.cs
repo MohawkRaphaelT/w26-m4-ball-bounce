@@ -15,10 +15,13 @@ public class Ball
     float minRandomSpeed = 1000;
     float maxRandomSpeed = 3000;
 
-    public void AddRandomForceToBall()
+    public void TryAddRandomForceToBall()
     {
-        velocity = Random.Direction();
-        velocity *= Random.Float(minRandomSpeed, maxRandomSpeed);
+        if (Input.IsKeyboardKeyPressed(KeyboardInput.Space))
+        {
+            velocity = Random.Direction();
+            velocity *= Random.Float(minRandomSpeed, maxRandomSpeed);
+        }
     }
 
     public void MoveBall()
